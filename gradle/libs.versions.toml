@@ -1,0 +1,15 @@
+[versions]
+morphe-patcher = "2.4.0"
+#noinspection GradleDependency
+smali = "4220ae75f7"
+gson = "2.15.0"
+hiddenapi = "6.1"
+morphe-patches-library = "2.2.0"
+
+[libraries]
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+hiddenapi = { module = "org.lsposed.hiddenapibypass:hiddenapibypass", version.ref = "hiddenapi" }
+morphe-patches-library = { module = "app.morphe:morphe-patches-library", version.ref = "morphe-patches-library" }
+
+[plugins]
+android-library = { id = "com.android.library" }
