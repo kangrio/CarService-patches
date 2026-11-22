@@ -15,9 +15,9 @@ import java.util.Base64
 
 @Suppress("unused")
 val microGSupportPatch = patch(
-    name = "MicroG Support",
+//    name = "MicroG Support",
     description = "Make support MicroG of this project https://github.com/GStore0/GStore",
-    default = false,
+//    default = false,
 ) {
     dependsOn(
         patch {
