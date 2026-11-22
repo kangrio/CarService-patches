@@ -26,7 +26,9 @@ CarService-AOSP implements the Android Automotive Car API on standard AOSP, allo
 - Android device running a compatible AOSP build.
 - [CarService-AOSP](https://github.com/kangrio/CarService-AOSP) installed and configured.
 - Morphe Patcher.
-- Compatible application APK.
+- Compatible application APK with a minimum SDK version of 29 or lower.
+
+**Note:** APKs with `minSdkVersion` higher than 29 are not supported.
 
 ## Compatibility
 
