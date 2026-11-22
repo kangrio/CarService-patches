@@ -1,6 +1,7 @@
 package com.kangrio.patches.all.misc.automotive.maps
 
 import app.morphe.patcher.Fingerprint
+import app.morphe.patcher.patch.packageMetadata
 import app.morphe.patcher.patch.patch
 import app.morphe.patcher.util.returnEarly
 import com.android.tools.smali.dexlib2.Opcode
@@ -28,6 +29,8 @@ private val fingerPrint = Fingerprint(
 @Suppress("unused")
 val fixMapsSystemUser = patch {
     execute {
+        if (packageMetadata.packageName != COMPATIBILITY_MAPS_AUTOMOTIVE.packageName) return@execute
+
         fingerPrint.matchOrNull()?.method?.returnEarly(true)
     }
 }

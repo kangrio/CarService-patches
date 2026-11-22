@@ -3,6 +3,7 @@ package com.kangrio.patches.all.misc.automotive.maps
 import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.Compatibility
+import app.morphe.patcher.patch.packageMetadata
 import app.morphe.patcher.patch.patch
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
@@ -29,6 +30,8 @@ private val fingerPrint = Fingerprint(
 @Suppress("unused")
 val fixMapsSelfKill = patch {
     execute {
+        if (packageMetadata.packageName != COMPATIBILITY_MAPS_AUTOMOTIVE.packageName) return@execute
+
         fingerPrint.matchOrNull()?.let { match ->
             val superClass = match.classDef.superclass
 

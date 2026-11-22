@@ -3,6 +3,7 @@ package com.kangrio.patches.all.misc.automotive.maps
 import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.morphe.patcher.patch.classDefForEach
 import app.morphe.patcher.patch.mutableClassDefBy
+import app.morphe.patcher.patch.packageMetadata
 import app.morphe.patcher.patch.patch
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.kangrio.patches.all.misc.Constant.COMPATIBILITY_MAPS_AUTOMOTIVE
@@ -19,6 +20,8 @@ private val PROVIDER_REPLACE_MAP = mapOf(
 @Suppress("unused")
 val replaceMapsProvider = patch {
     execute {
+        if (packageMetadata.packageName != COMPATIBILITY_MAPS_AUTOMOTIVE.packageName) return@execute
+
         classDefForEach { classDef ->
             val needsPatch = classDef.methods.any { m ->
                 m.implementation?.instructions?.any { it.replacementOrNull(PROVIDER_REPLACE_MAP) != null } == true
