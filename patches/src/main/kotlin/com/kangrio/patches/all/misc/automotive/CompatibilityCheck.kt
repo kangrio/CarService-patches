@@ -2,6 +2,7 @@ package com.kangrio.patches.all.misc.automotive
 
 import app.morphe.patcher.patch.document
 import app.morphe.patcher.patch.patch
+import com.kangrio.patches.all.util.requireMinSdk
 
 val compatibilityCheck = patch {
     execute {
@@ -9,9 +10,7 @@ val compatibilityCheck = patch {
             val manifest = document.documentElement
             val usesSdk = manifest.getElementsByTagName("uses-sdk").item(0)
             val minSdk = usesSdk.attributes.getNamedItem("android:minSdkVersion").nodeValue.toInt()
-            require(minSdk in listOf(29, 32)) {
-                "The Application is required min-sdk version is 29 or 32"
-            }
+            minSdk.requireMinSdk()
         }
     }
 }
