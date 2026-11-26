@@ -1,7 +1,9 @@
 package com.kangrio.patches.all.misc.automotive
 
 import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
+import app.morphe.patcher.patch.bytecodeContext
 import app.morphe.patcher.patch.classDefForEach
+import app.morphe.patcher.patch.intOption
 import app.morphe.patcher.patch.mutableClassDefBy
 import app.morphe.patcher.patch.patch
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
@@ -21,16 +23,27 @@ val carServicePatch = patch(
     description = "Patches for apps to support CarService",
     default = false
 ) {
+    val minSdkVersion = intOption(
+        key = "car_service_sdk",
+        title = "Car Service SDK",
+        description = "Set the Car Service SDK version",
+        values = mapOf(
+            "29" to 29,
+            "32" to 32
+        ),
+        required = true
+    )
+
     dependsOn(
         compatibilityCheck,
         microGSupportPatch,
-        addCarFrameworkSdkPatch,
         fixMapsSelfKill,
         fixMapsSystemUser,
         replaceMapsProvider
     )
 
     execute {
+        addCarFrameworkSdkPatch(minSdkVersion.value!!).execute(bytecodeContext)
         classDefForEach { classDef ->
             val needsPatch = classDef.methods.any { m ->
                 m.implementation?.instructions?.any { it.replacementOrNull(PACKAGE_NAME_REPLACE_MAP) != null } == true
