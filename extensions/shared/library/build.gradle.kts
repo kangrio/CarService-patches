@@ -19,7 +19,6 @@ configure<LibraryExtension> {
 }
 
 dependencies {
-    implementation(files("libs/android.car.sdk.29.jar"))
     implementation(libs.hiddenapi)
     compileOnly(project(":extensions:shared:stub"))
     compileOnly("androidx.annotation:annotation:1.9.1")

@@ -24,6 +24,7 @@ val carServicePatch = patch(
     dependsOn(
         compatibilityCheck,
         microGSupportPatch,
+        addCarFrameworkSdkPatch,
         fixMapsSelfKill,
         fixMapsSystemUser,
         replaceMapsProvider

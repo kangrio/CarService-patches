@@ -9,8 +9,8 @@ val compatibilityCheck = patch {
             val manifest = document.documentElement
             val usesSdk = manifest.getElementsByTagName("uses-sdk").item(0)
             val minSdk = usesSdk.attributes.getNamedItem("android:minSdkVersion").nodeValue.toInt()
-            require(minSdk <= 29) {
-                "The Application is required min-sdk version is 29 or lower"
+            require(minSdk in listOf(29, 32)) {
+                "The Application is required min-sdk version is 29 or 32"
             }
         }
     }
