@@ -224,9 +224,9 @@ public class PackageManagerProxy extends Binder {
 
             Object result;
             if (method.getParameterTypes()[1] == long.class) {
-                result = method.invoke(iPackageManager, authority, flags, userId);
+                result = method.invoke(iPackageManager, authority, (long) flags, userId);
             } else {
-                result = method.invoke(iPackageManager, authority, (int) flags, userId);
+                result = method.invoke(iPackageManager, authority, flags, userId);
             }
 
             return (ProviderInfo) result;
