@@ -2,7 +2,7 @@ package com.kangrio.patches.all.misc.automotive
 
 import app.morphe.patcher.patch.bytecodeContext
 import app.morphe.patcher.patch.patch
-import com.kangrio.patches.all.util.requireMinSdk
+import com.kangrio.patches.all.util.requireCarServiceMinSdk
 
 fun mergeExtension(minSdk: Int) = patch {
     extendWith("extensions/sdk$minSdk.mpe")
@@ -10,7 +10,7 @@ fun mergeExtension(minSdk: Int) = patch {
 
 fun addCarFrameworkSdkPatch(minSdkValue: Int) = patch {
     execute {
-        minSdkValue.requireMinSdk()
+        minSdkValue.requireCarServiceMinSdk()
         val method = bytecodeContext.javaClass.methods.first { method ->
             method.name.startsWith("mergeExtension")
         }
